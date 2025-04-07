@@ -1,0 +1,18 @@
+server:
+  port: 7777
+
+logging:
+  level:
+    root: debug
+    org.apache.tomcat.util.net.NioEndpoint: error
+    sun.rmi: error
+    java.io: error
+    javax.management: error
+
+spring:
+  application:
+    name: didcvee-sso
+  security:
+    oauth2:
+      authorizationserver:
+        issuer-url: http://localhost:7777
