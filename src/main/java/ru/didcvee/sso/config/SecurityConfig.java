@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @EnableWebSecurity // Активация конфигурации Spring Security
 @RequiredArgsConstructor // Lombok-аннотация для генерации final-конструктора
 @Configuration(proxyBeanMethods = false) // Явно указываем, что конфигурация не использует прокси (ускоряет запуск)
@@ -29,8 +31,10 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
-        return http.formLogin(Customizer.withDefaults()).build();
+        http
+                .oauth2Login(withDefaults())
+                        .authorizeHttpRequests(auth -> auth.anyRequest().authenticated());
+        return http.formLogin(withDefaults()).build();
     }
 
     /**

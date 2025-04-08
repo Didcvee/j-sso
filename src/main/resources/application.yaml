@@ -11,8 +11,14 @@ logging:
 
 spring:
   application:
-    name: didcvee-sso
+    name: j-sso
   security:
     oauth2:
+      client:
+        registration:
+          github:
+            clientId: 9b032807837420bc75c9
+            clientSecret: 373afe918f624ad1e9b46b331ebb6fdb560a90db
       authorizationserver:
         issuer-url: http://localhost:7777
+        introspection-endpoint: /oauth2/token-info
